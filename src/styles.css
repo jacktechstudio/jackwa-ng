@@ -1416,6 +1416,333 @@ a:focus-visible {
   }
 }
 
+/* ── 2026-07 review pass: channel nav, scroll reveals, ticker, micro-interactions ── */
+
+/* Chapter navigation: numbered channel chips */
+.header-nav {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-item {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.nav-item:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.nav-item.is-active {
+  color: #fffaf6;
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* Identity panel scanline texture */
+.identity-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(246, 242, 232, 0.05) 0 1px,
+    transparent 1px 4px
+  );
+  opacity: 0.35;
+}
+
+:root[data-theme='light'] .identity-panel::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(24, 28, 44, 0.05) 0 1px,
+    transparent 1px 4px
+  );
+  opacity: 0.3;
+}
+
+/* Role list: current-chapter tuner bar */
+.role-item {
+  position: relative;
+  padding-left: 13px;
+}
+
+.role-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 2px;
+  background: var(--line-strong);
+  transform: scaleY(0.32);
+  transform-origin: top;
+  transition:
+    transform 380ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 380ms ease,
+    box-shadow 380ms ease;
+}
+
+.role-item strong {
+  color: var(--text-muted);
+  transition: color 380ms ease;
+}
+
+.role-item span {
+  color: var(--text-dim);
+  transition: color 380ms ease;
+}
+
+.role-item.is-active strong {
+  color: var(--text);
+}
+
+.role-item.is-active span {
+  color: var(--text-muted);
+}
+
+.role-item.is-active::before {
+  background: var(--accent);
+  transform: scaleY(1);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Button icon micro-motion */
+.button svg {
+  transition: transform 200ms ease;
+}
+
+.button:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.hero-actions .button--primary:hover svg {
+  transform: translateY(3px);
+}
+
+/* Brand signal dot: long breath after power-on */
+.brand-dot {
+  animation:
+    signal-on 520ms cubic-bezier(0.2, 0.75, 0.2, 1) both,
+    brand-breathe 3.6s ease-in-out 1.4s infinite;
+}
+
+.identity-note img {
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+/* Project cards: tag chip, shine sweep, play button */
+.project-card__tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  background: rgba(9, 11, 20, 0.68);
+  backdrop-filter: blur(8px);
+  color: #f4f0e7;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.project-card__shine {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.16) 50%,
+    transparent 58%
+  );
+  transform: translateX(-130%) skewX(-8deg);
+  transition: transform 800ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.project-card:hover .project-card__shine {
+  transform: translateX(130%) skewX(-8deg);
+}
+
+.project-card__play {
+  transition:
+    transform 250ms ease,
+    background 250ms ease;
+}
+
+.project-card:hover .project-card__play {
+  transform: scale(1.14);
+  background: #fff;
+}
+
+/* Broadcast ticker marquee */
+.ticker-track-wrapper {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  animation: ticker-marquee 32s linear infinite;
+}
+
+.ticker-track > span {
+  flex: 0 0 auto;
+}
+
+.broadcast-ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* Collaboration board signal elements */
+.signal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--signal) 45%, transparent);
+  border-radius: 3px;
+  color: var(--signal);
+}
+
+.pulse-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 8px var(--signal);
+  animation: pulse-live 1.6s ease-in-out infinite;
+}
+
+.country-badge {
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+
+/* Social cards: brand tint + arrow nudge */
+.social-card__icon {
+  transition:
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.social-grid a:hover .social-card__icon {
+  transform: scale(1.08);
+}
+
+.social-card--bilibili:hover .social-card__icon {
+  background: #fb7299;
+}
+
+.social-card--youtube:hover .social-card__icon {
+  background: #e52d27;
+}
+
+.social-card--weibo:hover .social-card__icon {
+  background: #eb7350;
+}
+
+.social-card--xiaohongshu:hover .social-card__icon {
+  background: #ff2442;
+}
+
+.social-arrow {
+  opacity: 0.5;
+  transition:
+    transform 200ms ease,
+    opacity 200ms ease;
+}
+
+.social-grid a:hover .social-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.contribution-reveal {
+  min-width: 0;
+}
+
+/* Scroll reveal (uses the `translate` property so card hover transforms stay independent) */
+.reveal {
+  opacity: 0;
+  translate: 0 22px;
+  transition:
+    opacity 750ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    translate 750ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Theme switch: brief global color crossfade, enabled only during toggling */
+.is-theme-animating,
+.is-theme-animating *,
+.is-theme-animating *::before,
+.is-theme-animating *::after {
+  transition:
+    background-color 450ms ease,
+    color 450ms ease,
+    border-color 450ms ease,
+    box-shadow 450ms ease !important;
+}
+
+@keyframes ticker-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes brand-breathe {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 14px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+}
+
+@media (max-width: 1399px) {
+  .location {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .header-nav {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -3,9 +3,12 @@ import {
   ArrowDown,
   ArrowUpRight,
   GithubLogo,
+  MegaphoneSimple,
   Moon,
+  NotePencil,
   Play,
   Sun,
+  TelevisionSimple,
   YoutubeLogo,
 } from '@phosphor-icons/react';
 
@@ -14,103 +17,12 @@ const externalProps = {
   rel: 'noreferrer',
 };
 
-const projects = [
-  {
-    number: '01',
-    eyebrow: 'K-POP RELEASE RADAR',
-    title: '今天值得听的 K‑Pop 新发行',
-    description: '一周新发行的视觉化音乐雷达。',
-    image: '/assets/project-kpop.png',
-    href: 'https://kpop.jacktechstudio.com/',
-    className: 'project-card--lead',
-  },
-  {
-    number: '02',
-    eyebrow: 'JACK MUSIC',
-    title: '音乐发现与收藏',
-    description: '一张带着温度的个人音乐首页。',
-    image: '/assets/project-jack-music.png',
-    href: 'https://i.jackwa.ng/',
-    className: '',
-  },
-  {
-    number: '03',
-    eyebrow: 'AQUA WEB',
-    title: 'Mac OS X 10.2 Interface Study',
-    description: '把 Aqua 时代重新放回浏览器。',
-    image: '/assets/project-aqua.png',
-    href: 'https://macosaqua.jacktechstudio.com/',
-    className: '',
-  },
+const chapters = [
+  { id: 'work', number: '01', zh: '作品' },
+  { id: 'marketing', number: '02', zh: '营销' },
+  { id: 'media', number: '03', zh: '自媒体' },
+  { id: 'contribution', number: '04', zh: '贡献' },
 ];
-
-const socialLinks = [
-  { label: 'Bilibili', meta: '4.1W 粉丝', href: 'https://space.bilibili.com/669497011' },
-  { label: 'YouTube', meta: '10K+ 订阅', href: 'https://www.youtube.com/@j.w' },
-  { label: '微博', meta: '@jacktechstudio', href: 'https://www.weibo.com/u/7742599085' },
-  {
-    label: '小红书',
-    meta: 'DESK / GEAR',
-    href: 'https://www.xiaohongshu.com/user/profile/61d3beae000000001000f5ae',
-  },
-];
-
-function ThemeToggle({ theme, onToggle }) {
-  const nextTheme = theme === 'dark' ? '白天' : '夜间';
-
-  return (
-    <button
-      className="icon-button theme-toggle"
-      type="button"
-      onClick={onToggle}
-      aria-label={`切换到${nextTheme}模式`}
-      title={`切换到${nextTheme}模式`}
-    >
-      {theme === 'dark' ? <Sun weight="bold" /> : <Moon weight="fill" />}
-    </button>
-  );
-}
-
-function SectionHeading({ index, eyebrow, title, children, link, linkLabel }) {
-  return (
-    <div className="section-heading">
-      <div className="section-kicker">
-        <span>{index}</span>
-        <span>{eyebrow}</span>
-      </div>
-      <h2>{title}</h2>
-      {children && <div className="section-copy">{children}</div>}
-      {link && (
-        <a className="text-link" href={link} {...externalProps}>
-          {linkLabel}
-          <ArrowUpRight weight="bold" />
-        </a>
-      )}
-    </div>
-  );
-}
-
-function Timecode({ children }) {
-  return <span className="timecode">{children}</span>;
-}
-
-import { useEffect, useMemo, useState } from 'react';
-import {
-  ArrowDown,
-  ArrowUpRight,
-  GithubLogo,
-  Moon,
-  Play,
-  Sun,
-  YoutubeLogo,
-  Check,
-  Copy,
-} from '@phosphor-icons/react';
-
-const externalProps = {
-  target: '_blank',
-  rel: 'noreferrer',
-};
 
 const projects = [
   {
@@ -118,7 +30,7 @@ const projects = [
     eyebrow: 'K-POP RELEASE RADAR',
     tag: 'MUSIC RADAR',
     title: '今天值得听的 K‑Pop 新发行',
-    description: '一周新发行的视觉化音乐雷达。',
+    description: '每周 K-Pop 新发行，一张可视化音乐雷达。',
     image: '/assets/project-kpop.png',
     href: 'https://kpop.jacktechstudio.com/',
     className: 'project-card--lead',
@@ -138,7 +50,7 @@ const projects = [
     eyebrow: 'AQUA WEB',
     tag: 'MAC OS RETRO',
     title: 'Mac OS X 10.2 Interface Study',
-    description: '把 Aqua 时代重新放回浏览器。',
+    description: '把 2002 年的 Aqua 界面装回浏览器。',
     image: '/assets/project-aqua.png',
     href: 'https://macosaqua.jacktechstudio.com/',
     className: '',
@@ -146,14 +58,33 @@ const projects = [
 ];
 
 const socialLinks = [
-  { label: 'Bilibili', meta: '4.1W 粉丝', href: 'https://space.bilibili.com/669497011', brand: 'bilibili' },
-  { label: 'YouTube', meta: '10K+ 订阅', href: 'https://www.youtube.com/@j.w', brand: 'youtube' },
-  { label: '微博', meta: '@jacktechstudio', href: 'https://www.weibo.com/u/7742599085', brand: 'weibo' },
+  {
+    label: 'Bilibili',
+    meta: '4.1W 粉丝',
+    href: 'https://space.bilibili.com/669497011',
+    brand: 'bilibili',
+    Icon: TelevisionSimple,
+  },
+  {
+    label: 'YouTube',
+    meta: '10K+ 订阅',
+    href: 'https://www.youtube.com/@j.w',
+    brand: 'youtube',
+    Icon: YoutubeLogo,
+  },
+  {
+    label: '微博',
+    meta: '@jacktechstudio',
+    href: 'https://www.weibo.com/u/7742599085',
+    brand: 'weibo',
+    Icon: MegaphoneSimple,
+  },
   {
     label: '小红书',
     meta: 'DESK / GEAR',
     href: 'https://www.xiaohongshu.com/user/profile/61d3beae000000001000f5ae',
     brand: 'xiaohongshu',
+    Icon: NotePencil,
   },
 ];
 
@@ -175,7 +106,7 @@ function ThemeToggle({ theme, onToggle }) {
 
 function SectionHeading({ index, eyebrow, title, children, link, linkLabel }) {
   return (
-    <div className="section-heading">
+    <div className="section-heading reveal">
       <div className="section-kicker">
         <span>{index}</span>
         <span>{eyebrow}</span>
@@ -208,7 +139,6 @@ export function App() {
   const [identityText, setIdentityText] = useState('jackwa.ng');
   const [identityChanging, setIdentityChanging] = useState(false);
   const [activeSection, setActiveSection] = useState('work');
-  const [copiedLink, setCopiedLink] = useState(null);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -236,7 +166,7 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    const sectionIds = ['work', 'marketing', 'media', 'contribution'];
+    const sectionIds = chapters.map((chapter) => chapter.id);
     const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
 
     if (sections.length === 0) return undefined;
@@ -257,14 +187,39 @@ export function App() {
     return () => observer.disconnect();
   }, []);
 
-  const toggleTheme = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
+  useEffect(() => {
+    const nodes = Array.from(document.querySelectorAll('.reveal'));
+    if (nodes.length === 0) return undefined;
 
-  const handleCopyHandle = (label, handleText) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(handleText);
-      setCopiedLink(label);
-      setTimeout(() => setCopiedLink(null), 2000);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      nodes.forEach((node) => node.classList.add('is-in'));
+      return undefined;
     }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
+    );
+
+    nodes.forEach((node) => observer.observe(node));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleTheme = () => {
+    document.documentElement.classList.add('is-theme-animating');
+    setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
+    window.setTimeout(
+      () => document.documentElement.classList.remove('is-theme-animating'),
+      480
+    );
   };
 
   return (
@@ -275,11 +230,18 @@ export function App() {
           JACKWA.NG
         </a>
 
-        <nav className="header-nav" aria-label="快速导航">
-          <a href="#work" className={`nav-item ${activeSection === 'work' ? 'is-active' : ''}`}>01 WORK</a>
-          <a href="#marketing" className={`nav-item ${activeSection === 'marketing' ? 'is-active' : ''}`}>02 MARKETING</a>
-          <a href="#media" className={`nav-item ${activeSection === 'media' ? 'is-active' : ''}`}>03 MEDIA</a>
-          <a href="#contribution" className={`nav-item ${activeSection === 'contribution' ? 'is-active' : ''}`}>04 CONTRIBUTION</a>
+        <nav className="header-nav" aria-label="章节导航">
+          {chapters.map((chapter) => (
+            <a
+              key={chapter.id}
+              href={`#${chapter.id}`}
+              className={`nav-item ${activeSection === chapter.id ? 'is-active' : ''}`}
+              aria-label={`${chapter.number} ${chapter.zh}`}
+              title={`${chapter.number} · ${chapter.zh}`}
+            >
+              {chapter.number}
+            </a>
+          ))}
         </nav>
 
         <div className="header-actions">
@@ -320,8 +282,8 @@ export function App() {
                 <span>Music &amp; web experimenter</span>
               </p>
               <p className={`role-item ${activeSection === 'contribution' ? 'is-active' : ''}`}>
-                <strong>开源与软件本地化</strong>
-                <span>Localization &amp; UI Contributor</span>
+                <strong>软件本地化贡献者</strong>
+                <span>Localization &amp; UI contributor</span>
               </p>
             </div>
 
@@ -335,7 +297,7 @@ export function App() {
                 href="https://resume1.jacktechstudio.com/"
                 {...externalProps}
               >
-                了解我的自媒体
+                查看媒体简历
                 <ArrowUpRight weight="bold" />
               </a>
             </div>
@@ -358,11 +320,11 @@ export function App() {
         <div className="content-panel">
           <section className="chapter chapter--projects" id="work">
             <SectionHeading index="01" eyebrow="WORK" title="精选项目">
-              <p>音乐发现工具、音乐专题与网页界面实验。</p>
-              <p className="micro-copy">真实项目 · 可直接访问</p>
+              <p>音乐雷达、个人音乐首页与网页界面实验，全部真实上线。</p>
+              <p className="micro-copy">LIVE PROJECTS · 点击直达</p>
             </SectionHeading>
 
-            <div className="project-grid">
+            <div className="project-grid reveal" style={{ ['--reveal-delay']: '90ms' }}>
               {projects.map((project, index) => (
                 <a
                   className={`project-card ${project.className}`}
@@ -395,12 +357,16 @@ export function App() {
               ))}
             </div>
 
-            <div className="broadcast-ticker" aria-label="实时项目广播">
+            <div
+              className="broadcast-ticker reveal"
+              style={{ ['--reveal-delay']: '180ms' }}
+              aria-label="实时项目广播"
+            >
               <span className="ticker-badge">LIVE FEED</span>
               <div className="ticker-track-wrapper">
                 <div className="ticker-track">
-                  <span>FEATURED PROJECTS · K-POP RELEASE RADAR · JACK MUSIC · AQUA WEB INTERFACE STUDY · GLOBAL HARDWARE MARKETING · SHENZHEN SIGNAL 001 · </span>
-                  <span>FEATURED PROJECTS · K-POP RELEASE RADAR · JACK MUSIC · AQUA WEB INTERFACE STUDY · GLOBAL HARDWARE MARKETING · SHENZHEN SIGNAL 001 · </span>
+                  <span>FEATURED PROJECTS · K-POP RELEASE RADAR · JACK MUSIC · AQUA WEB INTERFACE STUDY · 出海硬件产品营销 GLOBAL HARDWARE MARKETING · 深圳信号 SHENZHEN SIGNAL 001 · </span>
+                  <span>FEATURED PROJECTS · K-POP RELEASE RADAR · JACK MUSIC · AQUA WEB INTERFACE STUDY · 出海硬件产品营销 GLOBAL HARDWARE MARKETING · 深圳信号 SHENZHEN SIGNAL 001 · </span>
                 </div>
               </div>
               <span className="ticker-status">ONLINE</span>
@@ -419,7 +385,7 @@ export function App() {
                 </>
               }
             >
-              <p>连接硬件产品、全球科技受众与有影响力的创作者。</p>
+              <p>让好产品、全球科技受众与头部创作者，调到同一个频道。</p>
               <ul>
                 <li>创作者合作 / Creator Partnerships</li>
                 <li>全球传播策略 / Global Communications</li>
@@ -427,12 +393,16 @@ export function App() {
               </ul>
             </SectionHeading>
 
-            <div className="collaboration-board" aria-label="合作科技博主">
+            <div
+              className="collaboration-board reveal"
+              style={{ ['--reveal-delay']: '90ms' }}
+              aria-label="合作科技博主"
+            >
               <div className="collaboration-board__header">
                 <span>CREATOR COLLABORATIONS</span>
                 <span className="signal-pill"><span className="pulse-dot" /> GLOBAL / TECH</span>
               </div>
-              <p className="collaboration-board__title">合作博主</p>
+              <p className="collaboration-board__title">合作创作者 / COLLABORATORS</p>
               <div className="collaboration-list">
                 <div className="creator-item">
                   <span>01</span>
@@ -459,7 +429,7 @@ export function App() {
 
           <section className="chapter chapter--media" id="media">
             <SectionHeading index="03" eyebrow="MEDIA" title="自媒体">
-              <p>在多个平台分享科技、工具与桌面生产力。</p>
+              <p>科技、工具与桌面生产力，多平台同步放送。</p>
               <div className="media-stats">
                 <span>
                   <strong>4.1W</strong>
@@ -479,13 +449,13 @@ export function App() {
                 href="https://resume1.jacktechstudio.com/"
                 {...externalProps}
               >
-                了解我的自媒体
+                查看媒体简历
                 <ArrowUpRight weight="bold" />
               </a>
             </SectionHeading>
 
             <div className="media-showcase">
-              <div className="feature-frame feature-frame--media">
+              <div className="feature-frame feature-frame--media reveal" style={{ ['--reveal-delay']: '90ms' }}>
                 <img
                   src="/assets/jack-studio.webp"
                   alt="Jack Tech Studio 的真实工作室与内容创作画面"
@@ -499,7 +469,7 @@ export function App() {
                 <Timecode>00:02:48:21</Timecode>
               </div>
 
-              <div className="social-grid">
+              <div className="social-grid reveal" style={{ ['--reveal-delay']: '170ms' }}>
                 {socialLinks.map((social) => (
                   <a
                     href={social.href}
@@ -508,7 +478,7 @@ export function App() {
                     className={`social-card social-card--${social.brand}`}
                   >
                     <span className="social-card__icon">
-                      {social.label === 'YouTube' ? <YoutubeLogo weight="fill" /> : <Play weight="fill" />}
+                      <social.Icon weight="fill" />
                     </span>
                     <strong>{social.label}</strong>
                     <small>{social.meta}</small>
@@ -530,32 +500,34 @@ export function App() {
               <p>BetterDisplay 简体中文本地化贡献者，为中文用户优化专业显示工具的使用体验。</p>
             </SectionHeading>
 
-            <a
-              className="contribution-card"
-              href="https://github.com/jacktechstudio/BetterDisplay-localization"
-              {...externalProps}
-            >
-              <div className="contribution-card__visual">
-                <img
-                  src="/assets/betterdisplay.webp"
-                  alt="BetterDisplay 官方应用界面截图"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="contribution-card__overlay" />
-              </div>
-              <div className="contribution-card__body">
-                <span className="contribution-card__icon">
-                  <GithubLogo weight="fill" />
-                </span>
-                <div>
-                  <p className="eyebrow">BETTERDISPLAY LOCALIZATION</p>
-                  <h3>Simplified Chinese localization contributor</h3>
-                  <p>@jacktechstudio · Localization contributor</p>
+            <div className="contribution-reveal reveal" style={{ ['--reveal-delay']: '90ms' }}>
+              <a
+                className="contribution-card"
+                href="https://github.com/jacktechstudio/BetterDisplay-localization"
+                {...externalProps}
+              >
+                <div className="contribution-card__visual">
+                  <img
+                    src="/assets/betterdisplay.webp"
+                    alt="BetterDisplay 官方应用界面截图"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="contribution-card__overlay" />
                 </div>
-                <ArrowUpRight className="contribution-card__arrow" weight="bold" />
-              </div>
-            </a>
+                <div className="contribution-card__body">
+                  <span className="contribution-card__icon">
+                    <GithubLogo weight="fill" />
+                  </span>
+                  <div>
+                    <p className="eyebrow">BETTERDISPLAY LOCALIZATION</p>
+                    <h3>Simplified Chinese localization contributor</h3>
+                    <p>@jacktechstudio · Localization contributor</p>
+                  </div>
+                  <ArrowUpRight className="contribution-card__arrow" weight="bold" />
+                </div>
+              </a>
+            </div>
           </section>
 
           <footer className="site-footer">
@@ -567,4 +539,3 @@ export function App() {
     </>
   );
 }
-

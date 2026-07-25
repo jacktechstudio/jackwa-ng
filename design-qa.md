@@ -80,4 +80,13 @@ The implementation preserves the selected source's editorial broadcast split, st
 - `npm run test:sites`: 4 tests passed.
 - Sites-ready artifacts are present in `dist/`, but no deployment was performed.
 
+### Pass 6 — code, copy, UI, and motion review (2026-07-26)
+
+- Fixed a build-breaking duplicate header in `src/App.jsx`: the imports and the `externalProps` / `projects` / `socialLinks` / `ThemeToggle` / `SectionHeading` / `Timecode` declarations were present twice, which halted the Vite build. The dead copy-handle state (`copiedLink`, `handleCopyHandle`) and the unused `Check` / `Copy` icon imports were removed.
+- Added the CSS that the markup already referenced but that had no styles: the broadcast ticker marquee (`.ticker-track` now animates `ticker-marquee`, pause-on-hover), the project `.project-card__tag` chip and `.project-card__shine` hover sweep, the chapter navigation chips, the role tuner bar, the collaboration board's `.signal-pill` / `.pulse-dot` / `.country-badge`, and per-brand social-card icon tints.
+- Redesigned the chapter navigation as numbered "channel" chips (`01`–`04`) because the previous text nav had no styling and overflowed the rail header at every viewport width; chips carry full `aria-label` / `title` and an active coral state, and hide below 820px where the mobile layout is linear.
+- Added scroll-reveal entrances (using the CSS `translate` property so card hover transforms stay independent) and a brief global color crossfade when toggling day/night; both are suppressed under `prefers-reduced-motion`, and the reduced-motion path reveals all blocks immediately. A faint scanline texture was added to the identity panel for broadcast atmosphere.
+- Copy revisions: the identity role now reads "软件本地化贡献者 / Localization & UI contributor" (no open-source claim, per project rules); the two résumé CTAs now read "查看媒体简历"; project, marketing, and media section copy was tightened into the broadcast "same channel" motif ("让好产品…调到同一个频道", "多平台同步放送"); the ticker is bilingual.
+- Verified: `npm run build` passes, `npm run test:sites` 4/4 pass, browser console 0 errors / 0 warnings. Desktop 1440×1000 dark + light, iPhone 17 / 17 Pro 402px, and iPhone 17 Pro Max 440px all show zero horizontal overflow (`scrollWidth === innerWidth`), the single-slot `jackwa.ng → jack wang` morph resolves, the channel nav active state tracks the section in view, the role tuner bar lights the active role, and the ticker / pulse dot / reveal animations run.
+
 final result: passed

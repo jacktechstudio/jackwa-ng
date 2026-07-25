@@ -39,3 +39,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Keep real screenshots crisp, preserve meaningful crops, and lazy-load below-the-fold images.
 - External project and profile links open in a new tab with `rel="noreferrer"`.
 - Interactive controls must support keyboard focus and at least 44px mobile touch targets.
+- Chapter navigation renders as numbered channel chips (`01`–`04`) with `aria-label` / `title`, hidden below 820px; do not reintroduce a full-text top nav (it overflows the rail header).
+- Scroll-reveal entrances use the CSS `translate` property (not `transform`) so card hover transforms stay independent; the reduced-motion path reveals all `.reveal` blocks immediately. Never describe BetterDisplay or this contribution as open source in any visible copy.
