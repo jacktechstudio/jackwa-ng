@@ -830,7 +830,7 @@ a:focus-visible {
 }
 
 .feature-frame--media img {
-  object-position: center 43%;
+  object-position: center 18%;
 }
 
 .live-dot {
@@ -1317,7 +1317,7 @@ a:focus-visible {
   }
 
   .feature-frame--media img {
-    object-position: center;
+    object-position: center 18%;
   }
 
   .social-grid {
