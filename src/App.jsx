@@ -2,10 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowDown,
   ArrowUpRight,
+  Camera,
+  ChatCircleText,
   GithubLogo,
-  MegaphoneSimple,
   Moon,
-  NotePencil,
   Play,
   Sun,
   TelevisionSimple,
@@ -84,14 +84,14 @@ const socialLinks = [
     meta: '@jacktechstudio',
     href: 'https://www.weibo.com/u/7742599085',
     brand: 'weibo',
-    Icon: MegaphoneSimple,
+    Icon: ChatCircleText,
   },
   {
     label: '小红书',
     meta: 'DESK / GEAR',
     href: 'https://www.xiaohongshu.com/user/profile/61d3beae000000001000f5ae',
     brand: 'xiaohongshu',
-    Icon: NotePencil,
+    Icon: Camera,
   },
 ];
 
