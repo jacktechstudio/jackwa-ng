@@ -10,7 +10,8 @@
       name="description"
       content="Jack Wang：出海硬件产品营销、科技内容创作、音乐与网页实验。"
     />
-    <meta id="theme-color" name="theme-color" content="#f5f7ff" />
+    <meta id="theme-color" name="theme-color" content="#f7f6f2" />
+    <meta id="color-scheme" name="color-scheme" content="light" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta id="apple-status-bar-style" name="apple-mobile-web-app-status-bar-style" content="default" />
     <script>
@@ -18,7 +19,8 @@
         if (localStorage.getItem('jackwa-theme') === 'dark') {
           document.documentElement.dataset.theme = 'dark';
           document.documentElement.style.colorScheme = 'dark';
-          document.querySelector('#theme-color').content = '#0b1128';
+          document.querySelector('#theme-color').content = '#0d1430';
+          document.querySelector('#color-scheme').content = 'dark';
           document.querySelector('#apple-status-bar-style').content = 'black-translucent';
         }
       } catch {}

@@ -214,12 +214,16 @@ export function App() {
   const [activeSection, setActiveSection] = useState('work');
 
   useEffect(() => {
+    const systemColor = theme === 'dark' ? '#0d1430' : '#f7f6f2';
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+    document.documentElement.style.backgroundColor = systemColor;
+    document.body.style.backgroundColor = systemColor;
     document.querySelector('#theme-color')?.setAttribute(
       'content',
-      theme === 'dark' ? '#0b1128' : '#f5f7ff'
+      systemColor
     );
+    document.querySelector('#color-scheme')?.setAttribute('content', theme);
     document.querySelector('#apple-status-bar-style')?.setAttribute(
       'content',
       theme === 'dark' ? 'black-translucent' : 'default'
