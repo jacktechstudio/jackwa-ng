@@ -30,7 +30,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Aqua Web: `https://macosaqua.jacktechstudio.com/`
 - Media résumé: `https://resume1.jacktechstudio.com/`
 - GitHub profile: `https://github.com/jacktechstudio`
-- BetterDisplay localization fork: `https://github.com/jacktechstudio/BetterDisplay-localization`
+- BetterDisplay official GitHub page: `https://github.com/waydabber/BetterDisplay`
 
 ## Implementation conventions
 

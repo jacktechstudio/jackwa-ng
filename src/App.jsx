@@ -616,8 +616,8 @@ export function App() {
               index="04"
               eyebrow="CONTRIBUTION"
               title="产品贡献"
-              link="https://github.com/jacktechstudio/BetterDisplay-localization"
-              linkLabel="查看本地化记录"
+              link="https://github.com/waydabber/BetterDisplay"
+              linkLabel="查看官方 GitHub"
             >
               <p>BetterDisplay 简体中文本地化贡献者，为中文用户优化专业显示工具的使用体验。</p>
             </SectionHeading>
@@ -625,7 +625,7 @@ export function App() {
             <div className="contribution-reveal reveal" style={{ ['--reveal-delay']: '90ms' }}>
               <a
                 className="contribution-card"
-                href="https://github.com/jacktechstudio/BetterDisplay-localization"
+                href="https://github.com/waydabber/BetterDisplay"
                 {...externalProps}
               >
                 <div className="contribution-card__visual">
