@@ -1419,6 +1419,10 @@ a:focus-visible {
   .identity-marquee {
     display: none;
   }
+
+  .broadcast-ticker {
+    display: none;
+  }
 }
 
 /* ── 2026-07 review pass: channel nav, scroll reveals, ticker, micro-interactions ── */
