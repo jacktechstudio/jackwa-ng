@@ -11,10 +11,11 @@
   --text-dim: #929bbb;
   --line: rgba(28, 45, 112, 0.16);
   --line-strong: rgba(28, 45, 112, 0.32);
-  --accent: #e43f49;
-  --accent-strong: #c72c37;
-  --signal: #2d66f4;
-  --signal-soft: rgba(45, 102, 244, 0.1);
+  --accent: #365bb8;
+  --accent-strong: #25448f;
+  --signal: #365bb8;
+  --signal-soft: rgba(54, 91, 184, 0.1);
+  --live: #d95b68;
   --card-shadow: 0 18px 46px rgba(31, 49, 112, 0.09);
   --header-height: 74px;
 }
@@ -30,10 +31,11 @@
   --text-dim: #7784aa;
   --line: rgba(189, 203, 247, 0.2);
   --line-strong: rgba(204, 216, 252, 0.38);
-  --accent: #ff626a;
-  --accent-strong: #ff4853;
-  --signal: #86a7ff;
-  --signal-soft: rgba(134, 167, 255, 0.14);
+  --accent: #8eabff;
+  --accent-strong: #b1c5ff;
+  --signal: #8eabff;
+  --signal-soft: rgba(142, 171, 255, 0.14);
+  --live: #ff7c87;
   --card-shadow: 0 24px 60px rgba(0, 4, 20, 0.3);
 }
 
@@ -127,8 +129,8 @@ a:focus-visible {
   height: 7px;
   flex: 0 0 7px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 60%, transparent);
+  background: var(--live);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--live) 60%, transparent);
   animation: signal-on 520ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
 }
 
@@ -185,6 +187,7 @@ a:focus-visible {
   background:
     linear-gradient(135deg, transparent 0 60%, color-mix(in srgb, var(--signal) 4%, transparent) 100%),
     color-mix(in srgb, var(--page) 97%, #ffffff);
+  container-type: inline-size;
 }
 
 .identity-panel__inner {
@@ -208,7 +211,7 @@ a:focus-visible {
 }
 
 .studio-label span:first-child {
-  color: var(--accent);
+  color: var(--signal);
   font-weight: 760;
   letter-spacing: 0.09em;
 }
@@ -223,7 +226,7 @@ a:focus-visible {
   display: block;
   min-width: 0;
   font-family: var(--font-display);
-  font-size: clamp(68px, 7.3vw, 118px);
+  font-size: clamp(58px, 14cqw, 92px);
   font-weight: 600;
   line-height: 0.78;
   letter-spacing: -0.035em;
@@ -250,7 +253,7 @@ a:focus-visible {
   position: absolute;
   left: -2.55vw;
   top: 50%;
-  color: var(--accent);
+  color: var(--live);
   font-family: var(--font-body);
   font-size: 10px;
   font-weight: 740;
@@ -1077,7 +1080,7 @@ a:focus-visible {
   }
 
   .identity-line {
-    font-size: 77px;
+    font-size: clamp(58px, 18cqw, 76px);
   }
 
   .identity-number {
@@ -1398,7 +1401,7 @@ a:focus-visible {
   }
 
   .identity-line {
-    font-size: clamp(66px, 6.7vw, 100px);
+    font-size: clamp(58px, 14cqw, 82px);
   }
 
   .hero-actions {
@@ -1650,7 +1653,12 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--accent);
+  color: var(--live);
+}
+
+.broadcast-status__live .pulse-dot {
+  background: var(--live);
+  box-shadow: 0 0 8px var(--live);
 }
 
 /* Identity-panel marquee (broadcast strapline) */
@@ -1825,13 +1833,13 @@ a:focus-visible {
 }
 
 :root[data-section='media'] {
-  --tint: #c084fc;
-  --tint-soft: rgba(192, 132, 252, 0.14);
+  --tint: var(--signal);
+  --tint-soft: var(--signal-soft);
 }
 
 :root[data-section='contribution'] {
-  --tint: #46d39a;
-  --tint-soft: rgba(70, 211, 154, 0.14);
+  --tint: var(--signal);
+  --tint-soft: var(--signal-soft);
 }
 
 .chapter--work {
@@ -1843,11 +1851,11 @@ a:focus-visible {
 }
 
 .chapter--media {
-  --ch-tint: #c084fc;
+  --ch-tint: var(--signal);
 }
 
 .chapter--contribution {
-  --ch-tint: #46d39a;
+  --ch-tint: var(--signal);
 }
 
 .chapter .section-kicker span:first-child,
