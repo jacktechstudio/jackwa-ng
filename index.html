@@ -10,9 +10,19 @@
       name="description"
       content="Jack Wang：出海硬件产品营销、科技内容创作、音乐与网页实验。"
     />
-    <meta name="theme-color" content="#f5f7ff" />
+    <meta id="theme-color" name="theme-color" content="#f5f7ff" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta id="apple-status-bar-style" name="apple-mobile-web-app-status-bar-style" content="default" />
+    <script>
+      try {
+        if (localStorage.getItem('jackwa-theme') === 'dark') {
+          document.documentElement.dataset.theme = 'dark';
+          document.documentElement.style.colorScheme = 'dark';
+          document.querySelector('#theme-color').content = '#0b1128';
+          document.querySelector('#apple-status-bar-style').content = 'black-translucent';
+        }
+      } catch {}
+    </script>
     <title>jackwa.ng — Jack Wang</title>
   </head>
   <body>

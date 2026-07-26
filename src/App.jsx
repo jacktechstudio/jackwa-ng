@@ -216,9 +216,13 @@ export function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+    document.querySelector('#theme-color')?.setAttribute(
       'content',
       theme === 'dark' ? '#0b1128' : '#f5f7ff'
+    );
+    document.querySelector('#apple-status-bar-style')?.setAttribute(
+      'content',
+      theme === 'dark' ? 'black-translucent' : 'default'
     );
     window.localStorage.setItem('jackwa-theme', theme);
   }, [theme]);

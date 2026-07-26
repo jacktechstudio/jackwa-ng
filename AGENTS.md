@@ -20,7 +20,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Desktop scroll-cue layout (2026-07-26): reserve bottom space in the sticky identity rail and absolutely pin the bilingual cue to it; it must never be clipped by the rail's overflow.
 - Desktop project-ticker rule (2026-07-26): the `LIVE FEED` project ticker is mobile-only. Hide it above 820px rather than pinning a running line to the bottom of a sparse desktop chapter.
 - Media image crop (2026-07-26): `jack-studio.webp` must prioritize its upper portion (`object-position: center 18%`) so Jack's head is never cropped on desktop or mobile.
-- Mobile status bar (2026-07-26): keep the iOS/webview status area immersive with the active page theme. The default HTML theme and `theme-color` are light (`#f5f7ff`), and React updates `theme-color` to the dark token when night mode is selected.
+- Mobile status bar (2026-07-26): keep the iOS/webview status area immersive with the active page theme. The default HTML theme and `theme-color` are light (`#f5f7ff`); an inline head script restores a saved dark theme before first paint (`#0b1128` + `black-translucent`), and React updates both metadata values on theme switches.
 - Visual direction: editorial broadcast split-screen, condensed headline typography, aubergine/midnight/ivory/coral/cyan palette. Do not copy beetya.ng's fonts or yellow-green treatment.
 - Required opening motion: show one `jackwa.ng` label on load, morph that same slot into `jack wang`, and leave only `jack wang` visible after the transition.
 - Do not stack or simultaneously display multiple identity labels, and do not use a full-screen intro.
