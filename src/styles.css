@@ -336,7 +336,7 @@ a:focus-visible {
   grid-template-columns: 54px minmax(0, 1fr);
   align-items: center;
   gap: 12px;
-  margin-top: auto;
+  margin-top: clamp(16px, 2.5vh, 28px);
   padding-top: clamp(16px, 2.5vh, 28px);
   border-top: 1px solid var(--line);
 }
@@ -443,7 +443,8 @@ a:focus-visible {
 
 .section-copy {
   max-width: 290px;
-  margin-top: 16px;
+  margin-top: auto;
+  padding-top: 16px;
   color: var(--text-muted);
   font-size: 12px;
 }
@@ -1413,6 +1414,13 @@ a:focus-visible {
   }
 }
 
+/* The desktop rail is a fixed information panel: keep its only scroll affordance clean. */
+@media (min-width: 821px) {
+  .identity-marquee {
+    display: none;
+  }
+}
+
 /* ── 2026-07 review pass: channel nav, scroll reveals, ticker, micro-interactions ── */
 
 /* Chapter navigation: numbered channel chips */
@@ -2220,5 +2228,10 @@ a:focus-visible {
     grid-row: auto;
     order: 2;
     padding: 20px 42px 20px 18px;
+  }
+
+  .scroll-cue {
+    margin-top: 22px;
+    padding-top: 0;
   }
 }
