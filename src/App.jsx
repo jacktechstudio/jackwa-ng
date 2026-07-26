@@ -202,10 +202,10 @@ function Count({ value, decimals = 0, suffix }) {
 
 export function App() {
   const initialTheme = useMemo(() => {
-    if (typeof window === 'undefined') return 'dark';
+    if (typeof window === 'undefined') return 'light';
     const savedTheme = window.localStorage.getItem('jackwa-theme');
     if (savedTheme === 'dark' || savedTheme === 'light') return savedTheme;
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    return 'light';
   }, []);
 
   const [theme, setTheme] = useState(initialTheme);
@@ -630,7 +630,7 @@ export function App() {
               >
                 <div className="contribution-card__visual">
                   <img
-                    src="/assets/betterdisplay.webp"
+                    src="/assets/betterdisplay-official.webp"
                     alt="BetterDisplay 官方应用界面截图"
                     loading="lazy"
                     decoding="async"
@@ -644,7 +644,7 @@ export function App() {
                   <div>
                     <p className="eyebrow">BETTERDISPLAY LOCALIZATION</p>
                     <h3>Simplified Chinese localization contributor</h3>
-                    <p>@jacktechstudio · Localization contributor</p>
+                    <p>Official BetterDisplay · Simplified Chinese localization contributor</p>
                   </div>
                   <ArrowUpRight className="contribution-card__arrow" weight="bold" />
                 </div>

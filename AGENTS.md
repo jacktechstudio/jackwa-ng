@@ -14,6 +14,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Primary role: global hardware product marketing / 出海硬件产品营销.
 - Secondary identity: technology content creator and music/web experimenter.
 - Selected visual source: `references/selected-broadcast-split.png`.
+- Selected visual update (2026-07-26): option 3 from the visual exploration — cool white paper, deep indigo typography, cobalt signal accents, and a cherry-red live indicator. Use the official BetterDisplay application screenshot at `public/assets/betterdisplay-official.webp` for the contribution card.
 - Visual direction: editorial broadcast split-screen, condensed headline typography, aubergine/midnight/ivory/coral/cyan palette. Do not copy beetya.ng's fonts or yellow-green treatment.
 - Required opening motion: show one `jackwa.ng` label on load, morph that same slot into `jack wang`, and leave only `jack wang` visible after the transition.
 - Do not stack or simultaneously display multiple identity labels, and do not use a full-screen intro.

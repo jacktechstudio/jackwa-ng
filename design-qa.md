@@ -117,3 +117,14 @@ The implementation preserves the selected source's editorial broadcast split, st
 - Verified: `npm run build` passes, `npm run test:sites` 4/4, console 0 errors. Desktop 1440: theme wipe fires (dark→light with the circle origin at the toggle), `data-section` + tint advance work→marketing→media→contribution, NOW SHOWING tracks the section, count-up settles to final values, the rail stays frozen (`innerTop` 0). Mobile 402/440 first screen fits with the marquee (no NOW SHOWING board) and no overflow.
 
 final result: passed
+
+### Pass 10 — option 3 visual implementation (2026-07-26)
+
+- Source visual truth: `/Users/jackwang/.codex/generated_images/019f938c-a0b4-7fc1-a4d4-7b6e6027abae/exec-d92af07a-20e0-4314-9b8e-e72c855ef842.png` (selected option 3).
+- Intended state: the cool-white default theme, with deep indigo display typography, cobalt signal accents, a cherry-red live signal, and the BetterDisplay contribution module in its desktop horizontal layout.
+- Implementation target: `http://127.0.0.1:5173/`; `npm run build` and `npm run test:sites` both passed (4/4).
+- Implemented changes: updated the shared visual tokens and display font stack, made the cool-white theme the first-visit default, retained a matching deep-indigo night theme, changed the BetterDisplay contribution card to copy-left / official app screenshot-right on desktop and image-first on mobile, and added `public/assets/betterdisplay-official.webp` from BetterDisplay's official product site.
+- Required screenshot evidence: blocked. The local server was reachable, but the available browser screenshot channel failed while returning its required control documentation, so it could not capture the rendered desktop or 402/440px mobile states. No old screenshot was reused as evidence.
+- Pending visual checks once the browser channel is available: full-view desktop comparison, focused BetterDisplay card crop, 402px and 440px horizontal-overflow measurements, theme wipe, and console-error check.
+
+final result: blocked

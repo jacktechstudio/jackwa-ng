@@ -1,40 +1,40 @@
 :root {
-  --font-display: 'Barlow Condensed', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-display: 'Iowan Old Style', 'Baskerville', 'Times New Roman', 'Songti SC', serif;
   --font-body: 'Archivo Variable', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --page: #080b16;
-  --page-deep: #050711;
-  --panel: #0d1221;
-  --panel-strong: #12192b;
-  --panel-soft: #151c2f;
-  --text: #f3efe7;
-  --text-muted: #9aa2b2;
-  --text-dim: #687185;
-  --line: rgba(197, 211, 234, 0.22);
-  --line-strong: rgba(207, 219, 241, 0.4);
-  --accent: #ff5845;
-  --accent-strong: #ff3f2b;
-  --signal: #62d5ff;
-  --signal-soft: rgba(98, 213, 255, 0.12);
-  --card-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+  --page: #f5f7ff;
+  --page-deep: #ecf0fc;
+  --panel: #fbfcff;
+  --panel-strong: #ffffff;
+  --panel-soft: #eef2fe;
+  --text: #121a42;
+  --text-muted: #647097;
+  --text-dim: #929bbb;
+  --line: rgba(28, 45, 112, 0.16);
+  --line-strong: rgba(28, 45, 112, 0.32);
+  --accent: #e43f49;
+  --accent-strong: #c72c37;
+  --signal: #2d66f4;
+  --signal-soft: rgba(45, 102, 244, 0.1);
+  --card-shadow: 0 18px 46px rgba(31, 49, 112, 0.09);
   --header-height: 74px;
 }
 
-:root[data-theme='light'] {
-  --page: #f1eee7;
-  --page-deep: #e8e2d8;
-  --panel: #faf7f0;
-  --panel-strong: #ffffff;
-  --panel-soft: #e8e4dc;
-  --text: #161827;
-  --text-muted: #5f6570;
-  --text-dim: #8b8f96;
-  --line: rgba(31, 36, 52, 0.18);
-  --line-strong: rgba(31, 36, 52, 0.34);
-  --accent: #b83a31;
-  --accent-strong: #992c25;
-  --signal: #006ec9;
-  --signal-soft: rgba(0, 110, 201, 0.1);
-  --card-shadow: 0 28px 70px rgba(67, 54, 41, 0.14);
+:root[data-theme='dark'] {
+  --page: #0b1128;
+  --page-deep: #070b1c;
+  --panel: #101936;
+  --panel-strong: #151f40;
+  --panel-soft: #1a264b;
+  --text: #f4f6ff;
+  --text-muted: #acb7d7;
+  --text-dim: #7784aa;
+  --line: rgba(189, 203, 247, 0.2);
+  --line-strong: rgba(204, 216, 252, 0.38);
+  --accent: #ff626a;
+  --accent-strong: #ff4853;
+  --signal: #86a7ff;
+  --signal-soft: rgba(134, 167, 255, 0.14);
+  --card-shadow: 0 24px 60px rgba(0, 4, 20, 0.3);
 }
 
 * {
@@ -54,8 +54,8 @@ body {
   overflow-x: clip;
   color: var(--text);
   background:
-    radial-gradient(circle at 15% 8%, rgba(90, 46, 112, 0.16), transparent 28rem),
-    radial-gradient(circle at 82% 18%, rgba(28, 77, 125, 0.12), transparent 32rem),
+    radial-gradient(circle at 10% 6%, rgba(54, 95, 245, 0.07), transparent 27rem),
+    radial-gradient(circle at 88% 16%, rgba(76, 112, 255, 0.05), transparent 32rem),
     var(--page);
   font-family: var(--font-body);
   font-size: 15px;
@@ -64,10 +64,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-:root[data-theme='light'] body {
+:root[data-theme='dark'] body {
   background:
-    radial-gradient(circle at 12% 8%, rgba(211, 143, 130, 0.16), transparent 28rem),
-    radial-gradient(circle at 86% 20%, rgba(103, 170, 210, 0.13), transparent 32rem),
+    radial-gradient(circle at 10% 8%, rgba(77, 94, 210, 0.16), transparent 28rem),
+    radial-gradient(circle at 86% 20%, rgba(47, 94, 208, 0.11), transparent 32rem),
     var(--page);
 }
 
@@ -183,8 +183,8 @@ a:focus-visible {
   min-width: 0;
   border-right: 1px solid var(--line);
   background:
-    linear-gradient(135deg, transparent 0 55%, color-mix(in srgb, var(--accent) 4%, transparent) 100%),
-    color-mix(in srgb, var(--page) 96%, #281731);
+    linear-gradient(135deg, transparent 0 60%, color-mix(in srgb, var(--signal) 4%, transparent) 100%),
+    color-mix(in srgb, var(--page) 97%, #ffffff);
 }
 
 .identity-panel__inner {
@@ -932,7 +932,7 @@ a:focus-visible {
 .contribution-card {
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+  grid-template-columns: minmax(250px, 0.68fr) minmax(0, 1.32fr);
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 9px;
@@ -949,28 +949,32 @@ a:focus-visible {
 }
 
 .contribution-card__visual {
+  grid-column: 2;
+  grid-row: 1;
   min-width: 0;
-  min-height: 260px;
+  min-height: 300px;
   overflow: hidden;
-  border-right: 1px solid var(--line);
-  background: #0b101c;
+  border-left: 1px solid var(--line);
+  background: var(--panel-soft);
 }
 
 .contribution-card__visual img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 16% center;
+  object-position: center;
 }
 
 .contribution-card__body {
+  grid-column: 1;
+  grid-row: 1;
   position: relative;
   min-width: 0;
   display: grid;
   grid-template-columns: 46px minmax(0, 1fr);
   align-items: center;
   gap: 14px;
-  padding: 24px;
+  padding: 28px 30px;
 }
 
 .contribution-card__icon {
@@ -1005,7 +1009,7 @@ a:focus-visible {
 }
 
 .contribution-card__body .eyebrow {
-  color: var(--signal);
+  color: var(--accent);
 }
 
 .contribution-card__arrow {
@@ -1467,6 +1471,20 @@ a:focus-visible {
     transparent 1px 4px
   );
   opacity: 0.3;
+}
+
+:root[data-theme='dark'] .identity-panel {
+  background:
+    linear-gradient(135deg, transparent 0 60%, color-mix(in srgb, var(--signal) 7%, transparent) 100%),
+    color-mix(in srgb, var(--page) 96%, #101936);
+}
+
+:root[data-theme='dark'] .identity-panel::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(220, 229, 255, 0.05) 0 1px,
+    transparent 1px 4px
+  );
 }
 
 /* Role list: current-chapter tuner bar */
@@ -2179,5 +2197,20 @@ a:focus-visible {
 
   .identity-note {
     margin-top: 20px;
+  }
+
+  .contribution-card__visual {
+    grid-column: auto;
+    grid-row: auto;
+    order: 1;
+    min-height: 214px;
+    border-left: 0;
+  }
+
+  .contribution-card__body {
+    grid-column: auto;
+    grid-row: auto;
+    order: 2;
+    padding: 20px 42px 20px 18px;
   }
 }
