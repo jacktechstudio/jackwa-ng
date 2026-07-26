@@ -17,6 +17,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Selected visual update (2026-07-26): option 3 from the visual exploration — cool white paper, deep indigo typography, cobalt signal accents, and a cherry-red live indicator. Use the official BetterDisplay application screenshot at `public/assets/betterdisplay-official.webp` for the contribution card.
 - Accent-color rule (2026-07-26): keep the visual system restrained. Use cobalt blue for interactive and chapter signals; reserve cherry red only for live/status semantics. Do not reintroduce separate green or purple chapter accents.
 - Desktop rail rule (2026-07-26): hide the identity marquee above 820px. The frozen desktop rail keeps one bottom-pinned bilingual scroll cue; the marquee remains mobile-only so the avatar, marquee, and cue never collide or clip.
+- Desktop scroll-cue layout (2026-07-26): reserve bottom space in the sticky identity rail and absolutely pin the bilingual cue to it; it must never be clipped by the rail's overflow.
 - Desktop project-ticker rule (2026-07-26): the `LIVE FEED` project ticker is mobile-only. Hide it above 820px rather than pinning a running line to the bottom of a sparse desktop chapter.
 - Visual direction: editorial broadcast split-screen, condensed headline typography, aubergine/midnight/ivory/coral/cyan palette. Do not copy beetya.ng's fonts or yellow-green treatment.
 - Required opening motion: show one `jackwa.ng` label on load, morph that same slot into `jack wang`, and leave only `jack wang` visible after the transition.

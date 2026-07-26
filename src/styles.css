@@ -2239,3 +2239,30 @@ a:focus-visible {
     padding-top: 0;
   }
 }
+
+/* Keep the desktop scroll guide visible even when the rail's content is dense. */
+@media (min-width: 821px) {
+  .identity-panel__inner {
+    padding-bottom: 88px;
+  }
+
+  .identity-note {
+    margin-top: auto;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    right: 3vw;
+    bottom: 24px;
+    left: 3vw;
+    margin: 0;
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1180px) {
+  .scroll-cue {
+    right: 30px;
+    left: 30px;
+  }
+}
