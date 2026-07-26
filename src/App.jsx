@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowDown,
   ArrowUpRight,
@@ -24,13 +24,20 @@ const chapters = [
   { id: 'contribution', number: '04', zh: '贡献' },
 ];
 
+const CHAPTER_META = {
+  work: { number: '01', en: 'WORK', zh: '精选项目' },
+  marketing: { number: '02', en: 'MARKETING', zh: '出海硬件营销' },
+  media: { number: '03', en: 'MEDIA', zh: '自媒体' },
+  contribution: { number: '04', en: 'CONTRIBUTION', zh: '产品贡献' },
+};
+
 const projects = [
   {
     number: '01',
     eyebrow: 'K-POP RELEASE RADAR',
     tag: 'MUSIC RADAR',
-    title: '今天值得听的 K‑Pop 新发行',
-    description: '每周 K-Pop 新发行，一张可视化音乐雷达。',
+    title: 'K‑Pop 新碟雷达',
+    description: '把每周 K‑Pop 新发行，做成一张看得见的音乐雷达。',
     image: '/assets/project-kpop.png',
     href: 'https://kpop.jacktechstudio.com/',
     className: 'project-card--lead',
@@ -39,8 +46,8 @@ const projects = [
     number: '02',
     eyebrow: 'JACK MUSIC',
     tag: 'MUSIC INDEX',
-    title: '音乐发现与收藏',
-    description: '一张带着温度的个人音乐首页。',
+    title: '杰克乐搜',
+    description: '搜罗全球好音乐，发现、收藏、循环播放。',
     image: '/assets/project-jack-music.png',
     href: 'https://i.jackwa.ng/',
     className: '',
@@ -49,8 +56,8 @@ const projects = [
     number: '03',
     eyebrow: 'AQUA WEB',
     tag: 'MAC OS RETRO',
-    title: 'Mac OS X 10.2 Interface Study',
-    description: '把 2002 年的 Aqua 界面装回浏览器。',
+    title: 'Aqua Web 界面重现',
+    description: '在浏览器里，重建 Mac OS X 10.2 的 Aqua 界面。',
     image: '/assets/project-aqua.png',
     href: 'https://macosaqua.jacktechstudio.com/',
     className: '',
@@ -104,6 +111,21 @@ function ThemeToggle({ theme, onToggle }) {
   );
 }
 
+function KineticTitle({ children }) {
+  if (typeof children === 'string') {
+    return (
+      <h2>
+        {children.split('\n').map((line, i) => (
+          <span className="kinetic-line reveal-line" key={line + i} style={{ ['--stagger']: `${i * 70}ms` }}>
+            {line}
+          </span>
+        ))}
+      </h2>
+    );
+  }
+  return <h2>{children}</h2>;
+}
+
 function SectionHeading({ index, eyebrow, title, children, link, linkLabel }) {
   return (
     <div className="section-heading reveal">
@@ -111,10 +133,10 @@ function SectionHeading({ index, eyebrow, title, children, link, linkLabel }) {
         <span>{index}</span>
         <span>{eyebrow}</span>
       </div>
-      <h2>{title}</h2>
-      {children && <div className="section-copy">{children}</div>}
+      <KineticTitle>{title}</KineticTitle>
+      {children && <div className="section-copy reveal-line" style={{ ['--stagger']: '160ms' }}>{children}</div>}
       {link && (
-        <a className="text-link" href={link} {...externalProps}>
+        <a className="text-link reveal-line" style={{ ['--stagger']: '230ms' }} href={link} {...externalProps}>
           {linkLabel}
           <ArrowUpRight weight="bold" />
         </a>
@@ -125,6 +147,57 @@ function SectionHeading({ index, eyebrow, title, children, link, linkLabel }) {
 
 function Timecode({ children }) {
   return <span className="timecode">{children}</span>;
+}
+
+function useCountUp(target, decimals = 0, duration = 1300) {
+  const ref = useRef(null);
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return undefined;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      setValue(target);
+      return undefined;
+    }
+
+    let raf = 0;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        const start = performance.now();
+        const tick = (now) => {
+          const t = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - t, 3);
+          setValue(target * eased);
+          if (t < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [target, duration]);
+
+  return [ref, value.toFixed(decimals)];
+}
+
+function Count({ value, decimals = 0, suffix }) {
+  const [ref, text] = useCountUp(value, decimals);
+  return (
+    <strong ref={ref}>
+      {text}
+      {suffix}
+    </strong>
+  );
 }
 
 export function App() {
@@ -145,6 +218,10 @@ export function App() {
     document.documentElement.style.colorScheme = theme;
     window.localStorage.setItem('jackwa-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.dataset.section = activeSection;
+  }, [activeSection]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -213,13 +290,26 @@ export function App() {
     return () => observer.disconnect();
   }, []);
 
-  const toggleTheme = () => {
-    document.documentElement.classList.add('is-theme-animating');
-    setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
-    window.setTimeout(
-      () => document.documentElement.classList.remove('is-theme-animating'),
-      480
+  const toggleTheme = (event) => {
+    const root = document.documentElement;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
     );
+    root.style.setProperty('--clip-x', `${x}px`);
+    root.style.setProperty('--clip-y', `${y}px`);
+    root.style.setProperty('--clip-r', `${Math.ceil(radius)}px`);
+
+    const apply = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'));
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && document.startViewTransition) {
+      document.startViewTransition(apply);
+    } else {
+      apply();
+    }
   };
 
   return (
@@ -252,10 +342,29 @@ export function App() {
 
       <main id="top" className="site-shell">
         <aside className="identity-panel">
+          <div className="identity-panel__ambient" aria-hidden="true" />
           <div className="identity-panel__inner">
             <div className="studio-label">
               <span>JACK TECH STUDIO</span>
               <span>科技数码内容创作者</span>
+            </div>
+
+            <div className="now-showing" aria-live="polite">
+              <span className="now-showing__tag"><span className="pulse-dot" /> 正在收看 NOW SHOWING</span>
+              <span className="now-showing__channel">
+                <strong>{CHAPTER_META[activeSection].number}</strong>
+                <span>{CHAPTER_META[activeSection].en}</span>
+              </span>
+              <span className="now-showing__zh">{CHAPTER_META[activeSection].zh}</span>
+            </div>
+            <div className="chapter-flash" key={activeSection} aria-hidden="true" />
+
+            <div className="broadcast-status" aria-label="直播状态">
+              <span className="broadcast-status__live">
+                <span className="pulse-dot" /> 正在直播 ON AIR
+              </span>
+              <span>深圳信号 SHENZHEN · CN</span>
+              <span>频道 04 CHAPTERS</span>
             </div>
 
             <div className="identity-stack" aria-live="polite">
@@ -310,8 +419,21 @@ export function App() {
               </p>
             </div>
 
-            <a className="scroll-cue" href="#work">
-              SCROLL TO EXPLORE
+            <div className="identity-marquee" aria-hidden="true">
+              <div className="identity-marquee__track">
+                <span>出海硬件产品营销 · 科技内容创作 · 音乐与网页实验 · K‑POP RADAR · JACK MUSIC · AQUA WEB · 合作 Mrwhosetheboss · Linus Tech Tips · Beebom · 深圳信号 001 · </span>
+                <span>出海硬件产品营销 · 科技内容创作 · 音乐与网页实验 · K‑POP RADAR · JACK MUSIC · AQUA WEB · 合作 Mrwhosetheboss · Linus Tech Tips · Beebom · 深圳信号 001 · </span>
+              </div>
+            </div>
+
+            <a className="scroll-cue" href="#work" aria-label="向下滚动，查看作品">
+              <span className="scroll-cue__track" aria-hidden="true">
+                <span className="scroll-cue__comet" />
+              </span>
+              <span className="scroll-cue__text">
+                <strong>向下滚动</strong>
+                <small>CONTINUE THE BROADCAST</small>
+              </span>
               <ArrowDown weight="bold" />
             </a>
           </div>
@@ -432,15 +554,15 @@ export function App() {
               <p>科技、工具与桌面生产力，多平台同步放送。</p>
               <div className="media-stats">
                 <span>
-                  <strong>4.1W</strong>
+                  <Count value={4.1} decimals={1} suffix="W" />
                   Bilibili 粉丝
                 </span>
                 <span>
-                  <strong>1000W+</strong>
+                  <Count value={1000} suffix="W+" />
                   Bilibili 播放
                 </span>
                 <span>
-                  <strong>10K+</strong>
+                  <Count value={10} suffix="K+" />
                   YouTube 订阅
                 </span>
               </div>
